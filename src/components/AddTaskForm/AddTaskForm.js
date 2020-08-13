@@ -103,7 +103,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
     setIsMobileFormToggled(!isMobileFormToggled);
   };
   return (
-    <section css={formWrapper}>
+    <div css={formWrapper}>
       <ToggleFormButton
         buttonText="New task"
         onClickHandler={toggleMobileFormHandler}
@@ -135,7 +135,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
           </Fragment>
         )}
       </form>
-    </section>
+    </div>
   );
 };
 

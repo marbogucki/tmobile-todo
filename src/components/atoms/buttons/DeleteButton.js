@@ -1,7 +1,11 @@
 import React, { useState, Fragment } from "react";
+
+// Components
 import LoadingCircle from "../loadings/LoadingCircle";
 
+// Libraries
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 import { jsx, css } from "@emotion/core";
 /** @jsx jsx */
@@ -43,15 +47,7 @@ const declineStyle = css`
   background-color: #db2828;
 `;
 
-const DeleteBtn = ({
-  btnText,
-  modalText,
-  id,
-  // setTestsState,
-  // testsState,
-  removeItemFromState,
-  endpointURL,
-}) => {
+const DeleteBtn = ({ btnText, modalText, id, removeItemFromState }) => {
   const toggleModalHandler = () => {
     setIsToggled(!isToggled);
   };
@@ -64,9 +60,11 @@ const DeleteBtn = ({
       const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
       await axios.delete(taskURL, {
         crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   // "Access-Control-Allow-Origin": "*",
+        //   "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+        // },
         auth: {
           username: "dawid",
           password: "WAFmkpSI",
@@ -75,6 +73,7 @@ const DeleteBtn = ({
 
       removeItemFromState(id);
       setIsloading(false);
+      // return <Redirect to="/" />;
     } catch (error) {
       console.log(error);
       setIsloading(false);

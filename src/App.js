@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 
 // Custome hooks
 import useAlerts from "./hooks/useAlerts";
@@ -9,6 +9,7 @@ import Dashbord from "./components/Dashboard/Dashboard";
 import TasksListing from "./components/TasksListing/TasksListing";
 import SectionHeader from "./components/atoms/headers/SectionHeader";
 import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
+import DoubleColumnGrid from "./layout/DoubleColumnGrid";
 
 // Layouts
 import SingleTaskView from "./layout/SingleTaskView";
@@ -81,13 +82,18 @@ function App() {
             exact
             render={() => (
               <Dashbord>
-                <SectionHeader text={"Tasks in progress"} />
-                <AddTaskForm
-                  addAlert={addAlert}
-                  tasksState={tasksState}
-                  setTasksState={setTasksState}
-                />
-                <TasksListing tasksState={tasksState} />
+                <SectionHeader text={"Add task"} />
+                <AddTaskForm addAlert={addAlert} tasksState={tasksState} />{" "}
+                <DoubleColumnGrid>
+                  <TasksListing
+                    headerText={"Tasks in progress"}
+                    tasksState={tasksState.filter((task) => !task.done)}
+                  />{" "}
+                  <TasksListing
+                    headerText={"Completed tasks"}
+                    tasksState={tasksState.filter((task) => task.done)}
+                  />
+                </DoubleColumnGrid>
               </Dashbord>
             )}
           />

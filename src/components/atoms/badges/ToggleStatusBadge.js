@@ -12,10 +12,21 @@ const badgeStyle = (isTaskDone) => css`
   color: #fff;
   cursor: pointer;
   font-size: 1.2rem;
+  display: inline-block;
+  opacity: 0.6;
+  transition: 0.3s ease-in all;
+  white-space: nowrap;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
-const ToggleStatusBadge = ({ isTaskDone }) => {
-  return <span css={badgeStyle(isTaskDone)}>in progress</span>;
+const ToggleStatusBadge = ({ isTaskDone, taskUpdateHandler }) => {
+  return (
+    <span onClick={taskUpdateHandler} css={badgeStyle(isTaskDone)}>
+      {isTaskDone ? "done" : "in progress"}
+    </span>
+  );
 };
 
 export default ToggleStatusBadge;
