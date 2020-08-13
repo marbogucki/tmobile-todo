@@ -30,6 +30,14 @@ const tableStyle = css`
   }
 `;
 
+const rowStyle = css`
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  &:hover {
+    border-bottom: 1px solid #b4b8e1;
+    /* cursor: pointer; */
+  }
+`;
+
 const TestsListing = ({ tasksState }) => {
   console.log(tasksState);
   return (
@@ -37,6 +45,7 @@ const TestsListing = ({ tasksState }) => {
       <table css={tableStyle}>
         <thead>
           <tr>
+            <th>Task ID</th>
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
@@ -44,7 +53,8 @@ const TestsListing = ({ tasksState }) => {
         </thead>
         <tbody>
           {tasksState.map((task) => (
-            <tr key={task.id}>
+            <tr css={rowStyle} key={task.id}>
+              <td>{task.id}</td>
               <td>{task.title}</td>
               <td>{task.description}</td>
               <td>{task.done}</td>

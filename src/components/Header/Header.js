@@ -71,9 +71,9 @@ const Header = () => {
     & > ul {
       list-style: none;
       display: flex;
-      & > li:last-of-type {
+      /* & > li:last-of-type {
         margin-left: auto;
-      }
+      } */
       @media screen and (max-width: 768px) {
         display: ${isNavToggled ? "flex" : "none"};
         flex-direction: column;

@@ -10,6 +10,9 @@ import TasksListing from "./components/TasksListing/TasksListing";
 import SectionHeader from "./components/atoms/headers/SectionHeader";
 import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 
+// Layouts
+import SingleTaskView from "./layout/SingleTaskView";
+
 // Libraries
 import axios from "axios";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -88,7 +91,7 @@ function App() {
               </Dashbord>
             )}
           />
-          <Route path="/tasks/:id" />
+          <Route path="/tasks/:id" component={SingleTaskView} />
         </MainContainer>
       </Router>
     </div>

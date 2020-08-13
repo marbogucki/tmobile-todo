@@ -46,8 +46,7 @@ const declineStyle = css`
 const DeleteBtn = ({
   btnText,
   modalText,
-  tokenState,
-  testID,
+  id,
   // setTestsState,
   // testsState,
   removeItemFromState,
@@ -59,15 +58,22 @@ const DeleteBtn = ({
 
   const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const deleteItem = async (testID, tokenState) => {
+  const deleteItem = async (id) => {
     try {
       setIsloading(true);
-      //   const authHeader = getAuthHeader(tokenState);
-      //   await axios.delete(`${endpointURL}/${testID}`, {
-      //     headers: authHeader,
-      //   });
+      const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
+      await axios.delete(taskURL, {
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        auth: {
+          username: "dawid",
+          password: "WAFmkpSI",
+        },
+      });
 
-      removeItemFromState(testID);
+      removeItemFromState(id);
       setIsloading(false);
     } catch (error) {
       console.log(error);
@@ -76,7 +82,7 @@ const DeleteBtn = ({
   };
 
   const onConfimHandler = () => {
-    deleteItem(testID, tokenState);
+    deleteItem(id);
   };
   return (
     <Fragment>
