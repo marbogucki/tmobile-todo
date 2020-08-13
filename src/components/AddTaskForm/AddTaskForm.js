@@ -8,6 +8,7 @@ import FormButton from "../atoms/buttons/FormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
+import Checkbox from "../atoms/inputs/Checkbox";
 
 /** @jsx jsx */
 
@@ -48,7 +49,17 @@ const barFormStyle = (isFormToggled) => css`
 `;
 
 const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
+  const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+
+  const initialState = {
+    title: "",
+    description: "",
+    done: false,
+  };
+
+  const [formState, setFormState] = useState(initialState);
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     console.log("form state:", formState);
@@ -66,7 +77,6 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
       })
       .then((res) => {
         setIsloading(false);
-
         setTasksState([...tasksState, res.data]);
       })
       .catch((error) => {
@@ -79,24 +89,21 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
         console.log(error);
       });
   };
+
   const onChangeHandler = (event) => {
     const {
-      target: { value, name },
+      target: { name },
     } = event;
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    console.log(value);
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-
-  const initialState = {
-    title: "",
-    description: "",
-    done: false,
-  };
-
-  const [formState, setFormState] = useState(initialState);
-  const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
 
   const toggleMobileFormHandler = (event) => {
     event.preventDefault();
@@ -115,6 +122,12 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
         ) : (
           <Fragment>
             <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
+            <Checkbox
+              id="taskStatus"
+              name="done"
+              value={formState.done}
+              onChange={onChangeHandler}
+            />
             <InputSlider
               id={"taskTitle"}
               type={"text"}

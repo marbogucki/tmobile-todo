@@ -83,7 +83,11 @@ function App() {
             render={() => (
               <Dashbord>
                 <SectionHeader text={"Add task"} />
-                <AddTaskForm addAlert={addAlert} tasksState={tasksState} />{" "}
+                <AddTaskForm
+                  addAlert={addAlert}
+                  tasksState={tasksState}
+                  setTasksState={setTasksState}
+                />{" "}
                 <DoubleColumnGrid>
                   <TasksListing
                     headerText={"Tasks in progress"}
