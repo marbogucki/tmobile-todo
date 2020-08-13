@@ -5,6 +5,8 @@ import { css, jsx } from "@emotion/core";
 
 /** @jsx jsx */
 const labelStyle = (value) => css`
+  text-align: center;
+  min-width: 83.5px;
   background-color: ${value ? "green" : "#db2828"};
   padding: 0.6rem 1.2rem;
   border-radius: 16px;

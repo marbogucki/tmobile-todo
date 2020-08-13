@@ -9,6 +9,8 @@ import SectionHeader from "../components/atoms/headers/SectionHeader";
 import ToggleStatusBadge from "../components/atoms/badges/ToggleStatusBadge";
 import TaskDescriptionPar from "../components/atoms/paragraphs/TaskDescriptionPar";
 import DeleteButton from "../components/atoms/buttons/DeleteButton";
+// import EditTaskButton from "../components/atoms/buttons/EditTaskButton";
+import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
 
 const SingleTaskView = ({ match }) => {
   const [taskData, setTaskData] = useState({});
@@ -55,6 +57,7 @@ const SingleTaskView = ({ match }) => {
         modalText={`Are you sure you want to delete task #${id}`}
         id={id}
       />
+      <EditTaskFormButton />
     </Dashboard>
   );
 };
