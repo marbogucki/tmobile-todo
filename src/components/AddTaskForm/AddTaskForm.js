@@ -64,24 +64,25 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
 
   const [formState, setFormState] = useState(initialState);
 
+  const postNewTaskCall = async () => {
+    setIsloading(true);
+    try {
+      const { data } = await axios.post(tasksAPIUrl, formState, httpHeader);
+      setIsloading(false);
+      setTasksState([...tasksState, data]);
+    } catch (error) {
+      setIsloading(false);
+      addAlert(
+        "danger",
+        "Ups. Unable to add task. Check data and try again",
+        3000
+      );
+      console.log(error);
+    }
+  };
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    setIsloading(true);
-    axios
-      .post(tasksAPIUrl, formState, httpHeader)
-      .then((res) => {
-        setIsloading(false);
-        setTasksState([...tasksState, res.data]);
-      })
-      .catch((error) => {
-        setIsloading(false);
-        addAlert(
-          "danger",
-          "Ups. Unable to add test. Check data and try again",
-          3000
-        );
-        console.log(error);
-      });
+    postNewTaskCall();
   };
 
   const onChangeHandler = (event) => {
