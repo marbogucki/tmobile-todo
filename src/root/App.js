@@ -6,6 +6,7 @@ import useAxiosGetCall from "../hooks/useAxiosGetCall";
 
 // Context
 import TasksContext from "../context/TasksContext";
+import AlertsContext from "../context/AlertsContext";
 
 // Components
 import MainContainer from "../components/MainContainer/MainContainer";
@@ -57,22 +58,16 @@ function App() {
     <div className="App">
       <Global styles={globalStyles} />
       <Router>
-        <MainContainer alerts={alerts}>
-          <TasksContext.Provider
-            value={{ tasksState: tasksState, setTasksState }}
-          >
-            <Route
-              path="/"
-              exact
-              render={() => <LandingPageView addAlert={addAlert} />}
-            />
-          </TasksContext.Provider>
-          <Route
-            path="/tasks/:id"
-            exact
-            render={(props) => <SingleTaskView {...props} />}
-          />
-        </MainContainer>
+        <AlertsContext.Provider value={{ alerts, addAlert, removeAlert }}>
+          <MainContainer>
+            <TasksContext.Provider
+              value={{ tasksState: tasksState, setTasksState }}
+            >
+              <Route path="/" exact component={LandingPageView} />
+            </TasksContext.Provider>
+            <Route path="/tasks/:id" exact component={SingleTaskView} />
+          </MainContainer>
+        </AlertsContext.Provider>
       </Router>
     </div>
   );

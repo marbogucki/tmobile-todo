@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext } from "react";
 
 // Libraries
 import { css, jsx } from "@emotion/core";
@@ -7,6 +7,9 @@ import { css, jsx } from "@emotion/core";
 import Header from "../Header/Header";
 import BarAlert from "../atoms/alerts/BarAlert";
 
+// Context
+import AlertsContext from "../../context/AlertsContext";
+
 /** @jsx jsx */
 const mainContainerStyle = css`
   max-width: 1170px;
@@ -14,17 +17,19 @@ const mainContainerStyle = css`
   margin-right: auto;
 `;
 
-const MainContainer = ({ children, alerts, removeAlert }) => {
+const MainContainer = ({ children }) => {
+  const { alerts, removeAlert } = useContext(AlertsContext);
+  console.log(alerts);
   return (
     <Fragment>
       <Header />
-      {alerts.map((alert) => (
+      {alerts.map(({ id, type, text }) => (
         <BarAlert
-          key={alert.id}
-          alertType={alert.type}
-          alertText={alert.text}
+          key={id}
+          alertType={type}
+          alertText={text}
           removeAlert={removeAlert}
-          id={alert.id}
+          id={id}
         />
       ))}
       <main css={mainContainerStyle}>{children}</main>

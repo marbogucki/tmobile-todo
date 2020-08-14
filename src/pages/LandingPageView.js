@@ -10,7 +10,7 @@ import DoubleColumnGrid from "../layout/DoubleColumnGrid";
 // Context
 import TasksContext from "../context/TasksContext";
 
-const LandingPageView = ({ addAlert }) => {
+const LandingPageView = () => {
   const { tasksState } = useContext(TasksContext);
   const getInProgressTasks = (tasks) => tasks.filter((task) => !task.done);
   const getCompletedTasks = (tasks) => tasks.filter((task) => task.done);
@@ -18,7 +18,7 @@ const LandingPageView = ({ addAlert }) => {
   return (
     <Dashbord>
       <SectionHeader text={"Add task"} />
-      <AddTaskForm addAlert={addAlert} />{" "}
+      <AddTaskForm />{" "}
       <DoubleColumnGrid>
         <TasksListing
           headerText={"Tasks in progress"}

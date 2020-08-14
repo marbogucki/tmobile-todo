@@ -16,6 +16,7 @@ import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 
 // Context
 import TasksContext from "../../context/TasksContext";
+import AlertsContext from "../../context/AlertsContext";
 
 /** @jsx jsx */
 
@@ -56,10 +57,11 @@ const barFormStyle = (isFormToggled) => css`
   }
 `;
 
-const AddTaskForm = ({ addAlert }) => {
+const AddTaskForm = () => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
   const { tasksState, setTasksState } = useContext(TasksContext);
+  const { addAlert } = useContext(AlertsContext);
 
   const initialState = {
     title: "",
