@@ -134,7 +134,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
               type={"text"}
               name={"description"}
               labelText={"task description"}
-              value={formState.sizeX}
+              value={formState.description}
               onChange={onChangeHandler}
             />
             <FormButton btnText="Add task" />{" "}
