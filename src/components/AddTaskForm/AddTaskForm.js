@@ -64,7 +64,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
 
   const [formState, setFormState] = useState(initialState);
 
-  const postNewTaskCall = async () => {
+  const postNewTaskCall = async (formState, tasksState) => {
     setIsloading(true);
     try {
       const { data } = await axios.post(tasksAPIUrl, formState, httpHeader);
