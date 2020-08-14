@@ -60,7 +60,7 @@ const linkStyle = css`
   text-decoration: none;
 `;
 
-const TestsListing = ({ tasksState, headerText, taskUpdateHandler }) => {
+const TestsListing = ({ tasksState, headerText }) => {
   return (
     <div css={tableWrapper}>
       <SectionHeader text={headerText} />
@@ -74,21 +74,18 @@ const TestsListing = ({ tasksState, headerText, taskUpdateHandler }) => {
           </tr>
         </thead>
         <tbody>
-          {tasksState.map(({ id, title, description, done }) => (
-            <tr css={rowStyle} key={id}>
+          {tasksState.map((task) => (
+            <tr css={rowStyle} key={task.id}>
               <td css={linkStyle}>
-                <Link css={linkStyle} to={`/tasks/${id}`}>{`#${id}`}</Link>{" "}
+                <Link
+                  css={linkStyle}
+                  to={`/tasks/${task.id}`}
+                >{`#${task.id}`}</Link>{" "}
               </td>
-              <td>{curlText(title, 10)}</td>
-              <td>{curlText(description, 10)}</td>
+              <td>{curlText(task.title, 10)}</td>
+              <td>{curlText(task.description, 10)}</td>
               <td>
-                <ToggleStatusBadge
-                  isTaskDone={done}
-                  id={id}
-                  title={title}
-                  description={description}
-                  taskUpdateHandler={taskUpdateHandler}
-                />
+                <ToggleStatusBadge task={task} />
               </td>
             </tr>
           ))}

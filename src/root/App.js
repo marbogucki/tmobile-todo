@@ -78,7 +78,6 @@ function App() {
                 addAlert={addAlert}
                 tasksState={tasksState}
                 setTasksState={setTasksState}
-                taskUpdateHandler={taskUpdateHandler}
               />
             )}
           />

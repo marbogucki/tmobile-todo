@@ -7,12 +7,7 @@ import SectionHeader from "../components/atoms/headers/SectionHeader";
 import AddTaskForm from "../components/AddTaskForm/AddTaskForm";
 import DoubleColumnGrid from "../layout/DoubleColumnGrid";
 
-const LandingPageView = ({
-  addAlert,
-  tasksState,
-  setTasksState,
-  taskUpdateHandler,
-}) => {
+const LandingPageView = ({ addAlert, tasksState, setTasksState }) => {
   return (
     <Dashbord>
       <SectionHeader text={"Add task"} />
@@ -25,12 +20,10 @@ const LandingPageView = ({
         <TasksListing
           headerText={"Tasks in progress"}
           tasksState={tasksState.filter((task) => !task.done)}
-          taskUpdateHandler={taskUpdateHandler}
         />{" "}
         <TasksListing
           headerText={"Completed tasks"}
           tasksState={tasksState.filter((task) => task.done)}
-          taskUpdateHandler={taskUpdateHandler}
         />
       </DoubleColumnGrid>
     </Dashbord>

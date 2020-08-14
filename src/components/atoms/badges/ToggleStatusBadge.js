@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Libraries
 import { css, jsx } from "@emotion/core";
 
+// Utils
+import axiosHTTPCall from "../../../utils/httpAxiosCalls/axiosHTTPCall";
+
+// Authorization
+import { tasksAPIUrl } from "../../../auth/tasksAPISettings";
+
 /** @jsx jsx */
 
-const badgeStyle = (isTaskDone) => css`
+const badgeStyle = (done) => css`
   background-color: grey;
   padding: 0.6rem 1.2rem;
   border-radius: 16px;
@@ -17,31 +23,26 @@ const badgeStyle = (isTaskDone) => css`
   transition: 0.3s ease-in all;
   white-space: nowrap;
   &:hover {
-    background-color: ${isTaskDone ? "green" : "#db2828"};
+    background-color: ${done ? "green" : "#db2828"};
     opacity: 1;
   }
 `;
 
-const ToggleStatusBadge = ({
-  isTaskDone,
-  taskUpdateHandler,
-  id,
-  title,
-  description,
-}) => {
+const ToggleStatusBadge = ({ task }) => {
+  const [isLoading, setIsloading] = useState(false);
+  const { id, done } = task;
   const onClickHandler = () => {
     const newTaskData = {
-      id: 9,
-      title,
-      description,
-      done: !isTaskDone,
+      ...task,
+      done: !done,
     };
-    taskUpdateHandler(id, newTaskData);
+
+    axiosHTTPCall("put", tasksAPIUrl, newTaskData, setIsloading);
   };
 
   return (
-    <span onClick={onClickHandler} css={badgeStyle(isTaskDone)}>
-      {isTaskDone ? "done" : "in progress"}
+    <span onClick={onClickHandler} css={badgeStyle(done)}>
+      {done ? "done" : "in progress"}
     </span>
   );
 };

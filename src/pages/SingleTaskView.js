@@ -20,6 +20,7 @@ const SingleTaskView = ({ match, taskUpdateHandler }) => {
   const {
     params: { id },
   } = match;
+
   const singleTaskAPIUrl = `${tasksAPIUrl}/${id}`;
 
   useAxiosGetCall(singleTaskAPIUrl, setIsloading, (data) => {
@@ -30,11 +31,7 @@ const SingleTaskView = ({ match, taskUpdateHandler }) => {
 
   return (
     <Dashboard>
-      <ToggleStatusBadge
-        isTaskDone={done}
-        taskUpdateHandler={taskUpdateHandler}
-        id={id}
-      />
+      <ToggleStatusBadge task={taskData} />
       <SectionHeader text={`#${id} ${title}`} />
       <TaskDescriptionPar>{description}</TaskDescriptionPar>
       <DeleteButton
