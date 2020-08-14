@@ -1,18 +1,14 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 
 // Custome hooks
 import useAlerts from "../hooks/useAlerts";
 
 // Components
 import MainContainer from "../components/MainContainer/MainContainer";
-import Dashbord from "../components/Dashboard/Dashboard";
-import TasksListing from "../components/TasksListing/TasksListing";
-import SectionHeader from "../components/atoms/headers/SectionHeader";
-import AddTaskForm from "../components/AddTaskForm/AddTaskForm";
-import DoubleColumnGrid from "../layout/DoubleColumnGrid";
 
-// Layouts
-import SingleTaskView from "../layout/SingleTaskView";
+// Pages
+import SingleTaskView from "../pages/SingleTaskView";
+import LandingPageView from "../pages/LandingPageView";
 
 // Libraries
 import axios from "axios";
@@ -103,26 +99,12 @@ function App() {
             path="/"
             exact
             render={() => (
-              <Dashbord>
-                <SectionHeader text={"Add task"} />
-                <AddTaskForm
-                  addAlert={addAlert}
-                  tasksState={tasksState}
-                  setTasksState={setTasksState}
-                />{" "}
-                <DoubleColumnGrid>
-                  <TasksListing
-                    headerText={"Tasks in progress"}
-                    tasksState={tasksState.filter((task) => !task.done)}
-                    taskUpdateHandler={taskUpdateHandler}
-                  />{" "}
-                  <TasksListing
-                    headerText={"Completed tasks"}
-                    tasksState={tasksState.filter((task) => task.done)}
-                    taskUpdateHandler={taskUpdateHandler}
-                  />
-                </DoubleColumnGrid>
-              </Dashbord>
+              <LandingPageView
+                addAlert={addAlert}
+                tasksState={tasksState}
+                setTasksState={setTasksState}
+                taskUpdateHandler={taskUpdateHandler}
+              />
             )}
           />
           <Route
