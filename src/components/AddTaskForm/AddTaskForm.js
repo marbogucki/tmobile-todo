@@ -65,6 +65,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
   const [formState, setFormState] = useState(initialState);
 
   const postNewTaskCall = async (formState, tasksState) => {
+    console.log(tasksAPIUrl, httpHeader);
     setIsloading(true);
     try {
       const { data } = await axios.post(tasksAPIUrl, formState, httpHeader);
@@ -82,7 +83,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
   };
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    postNewTaskCall();
+    postNewTaskCall(formState, tasksState);
   };
 
   const onChangeHandler = (event) => {
