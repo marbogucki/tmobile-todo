@@ -31,6 +31,7 @@ const ToggleStatusBadge = ({
 }) => {
   const onClickHandler = () => {
     const newTaskData = {
+      id: 9,
       title,
       description,
       done: !isTaskDone,

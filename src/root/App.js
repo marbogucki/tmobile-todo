@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // Custome hooks
 import useAlerts from "../hooks/useAlerts";
+import useAxiosGetCall from "../hooks/useAxiosGetCall";
 
 // Components
 import MainContainer from "../components/MainContainer/MainContainer";
@@ -27,22 +28,15 @@ function App() {
   const [isLoading, setIsloading] = useState(false);
   const [alerts, setAlerts] = useState([]);
 
-  const populateTasksListing = async () => {
-    try {
-      setIsloading(true);
-      const { data } = await axios.get(tasksAPIUrl, httpHeader);
-      setTasksState(data);
-      setIsloading(false);
-    } catch (error) {
-      setIsloading(false);
-      console.log(error);
-    }
-  };
+  useAxiosGetCall(tasksAPIUrl, httpHeader, setIsloading, (data) => {
+    setTasksState(data);
+  });
 
   const taskUpdateHandler = async (id, newTaskData) => {
     try {
       //   setIsloading(true);
       const taskURL = `${tasksAPIUrl}/${id}`;
+      console.log(taskURL, newTaskData);
       const { data } = await axios.put(taskURL, newTaskData, httpHeader);
       // setTaskData(data);
       //   setIsloading(false);
@@ -51,10 +45,6 @@ function App() {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    populateTasksListing();
-  }, []);
 
   const removeAlert = (id) => {
     setAlerts([...alerts].filter((alert) => alert.id !== id));
