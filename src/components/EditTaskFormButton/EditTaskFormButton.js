@@ -85,24 +85,25 @@ const EditTaskFormButton = ({
 
   const [formState, setFormState] = useState(initialState);
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
+  const updateTaskCall = async () => {
     setIsloading(true);
-    axios
-      .put(tasksAPIUrl, formState, httpHeader)
-      .then((res) => {
-        setIsloading(false);
-        setTasksState([...tasksState, res.data]);
-      })
-      .catch((error) => {
-        setIsloading(false);
-        addAlert(
-          "danger",
-          "Ups. Unable to add test. Check data and try again",
-          3000
-        );
-        console.log(error);
-      });
+    try {
+      const { data } = await axios.put(tasksAPIUrl, formState, httpHeader);
+      setIsloading(false);
+      setTasksState([...tasksState, data]);
+    } catch (error) {
+      setIsloading(false);
+      addAlert(
+        "danger",
+        "Ups. Unable to edit task. Check data and try again",
+        3000
+      );
+      console.log(error);
+    }
+  };
+
+  const onSubmitHandler = (event) => {
+    updateTaskCall();
   };
 
   const onChangeHandler = (event) => {
