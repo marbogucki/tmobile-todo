@@ -19,6 +19,9 @@ import { v4 as uuidv4 } from "uuid";
 // Styles
 import globalStyles from "./globalStyles";
 
+// Authorization
+import { tasksAPIUrl, httpHeader } from "../auth/tasksAPISettings";
+
 function App() {
   const [tasksState, setTasksState] = useState([]);
   const [isLoading, setIsloading] = useState(false);
@@ -27,16 +30,7 @@ function App() {
   const populateTasksListing = async () => {
     try {
       setIsloading(true);
-      const { data } = await axios.get("https://jarzebak.eu/dawid/tasks", {
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      });
+      const { data } = await axios.get(tasksAPIUrl, httpHeader);
       setTasksState(data);
       setIsloading(false);
     } catch (error) {
@@ -48,17 +42,8 @@ function App() {
   const taskUpdateHandler = async (id, newTaskData) => {
     try {
       //   setIsloading(true);
-      const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
-      const { data } = await axios.put(taskURL, newTaskData, {
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      });
+      const taskURL = `${tasksAPIUrl}/${id}`;
+      const { data } = await axios.put(taskURL, newTaskData, httpHeader);
       // setTaskData(data);
       //   setIsloading(false);
     } catch (error) {

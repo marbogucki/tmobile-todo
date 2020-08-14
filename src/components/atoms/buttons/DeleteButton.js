@@ -6,8 +6,11 @@ import LoadingCircle from "../loadings/LoadingCircle";
 // Libraries
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-
 import { jsx, css } from "@emotion/core";
+
+// Authorization
+import { tasksAPIUrl, httpHeader } from "../../../auth/tasksAPISettings";
+
 /** @jsx jsx */
 const buttonStyle = css`
   border-radius: 2px;
@@ -58,19 +61,8 @@ const DeleteBtn = ({ btnText, modalText, id, removeItemFromState }) => {
   const deleteItem = async (id) => {
     try {
       setIsloading(true);
-      const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
-      await axios.delete(taskURL, {
-        crossDomain: true,
-        // headers: {
-        //   "Content-Type": "application/json",
-        //   // "Access-Control-Allow-Origin": "*",
-        //   "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
-        // },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      });
+      const taskURL = `${tasksAPIUrl}/${id}`;
+      await axios.delete(taskURL, httpHeader);
 
       removeItemFromState(id);
       setIsloading(false);

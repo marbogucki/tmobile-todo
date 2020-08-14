@@ -10,6 +10,9 @@ import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
 import Checkbox from "../atoms/inputs/Checkbox";
 
+// Authorization
+import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
+
 /** @jsx jsx */
 
 const formWrapper = css`
@@ -86,16 +89,7 @@ const EditTaskFormButton = ({
     event.preventDefault();
     setIsloading(true);
     axios
-      .post("https://jarzebak.eu/dawid/tasks", formState, {
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      })
+      .put(tasksAPIUrl, formState, httpHeader)
       .then((res) => {
         setIsloading(false);
         setTasksState([...tasksState, res.data]);

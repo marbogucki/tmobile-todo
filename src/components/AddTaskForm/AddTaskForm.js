@@ -2,6 +2,7 @@
 import React, { useState, Fragment } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
+
 // Components
 import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
@@ -9,6 +10,9 @@ import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
 import Checkbox from "../atoms/inputs/Checkbox";
+
+// Authorization
+import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 
 /** @jsx jsx */
 
@@ -64,16 +68,7 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
     event.preventDefault();
     setIsloading(true);
     axios
-      .post("https://jarzebak.eu/dawid/tasks", formState, {
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      })
+      .post(tasksAPIUrl, formState, httpHeader)
       .then((res) => {
         setIsloading(false);
         setTasksState([...tasksState, res.data]);

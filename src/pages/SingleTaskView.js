@@ -11,6 +11,9 @@ import TaskDescriptionPar from "../components/atoms/paragraphs/TaskDescriptionPa
 import DeleteButton from "../components/atoms/buttons/DeleteButton";
 import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
 
+// Authorization
+import { tasksAPIUrl, httpHeader } from "../auth/tasksAPISettings";
+
 const SingleTaskView = ({ match, taskUpdateHandler }) => {
   const [taskData, setTaskData] = useState({});
   const {
@@ -20,17 +23,8 @@ const SingleTaskView = ({ match, taskUpdateHandler }) => {
   const populateTaskData = async () => {
     try {
       //   setIsloading(true);
-      const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
-      const { data } = await axios.get(taskURL, {
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      });
+      const taskURL = `${tasksAPIUrl}/${id}`;
+      const { data } = await axios.get(taskURL, httpHeader);
       setTaskData(data);
       //   setIsloading(false);
     } catch (error) {
