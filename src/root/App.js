@@ -1,18 +1,18 @@
 import React, { useEffect, useState, Fragment } from "react";
 
 // Custome hooks
-import useAlerts from "./hooks/useAlerts";
+import useAlerts from "../hooks/useAlerts";
 
 // Components
-import MainContainer from "./components/MainContainer/MainContainer";
-import Dashbord from "./components/Dashboard/Dashboard";
-import TasksListing from "./components/TasksListing/TasksListing";
-import SectionHeader from "./components/atoms/headers/SectionHeader";
-import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
-import DoubleColumnGrid from "./layout/DoubleColumnGrid";
+import MainContainer from "../components/MainContainer/MainContainer";
+import Dashbord from "../components/Dashboard/Dashboard";
+import TasksListing from "../components/TasksListing/TasksListing";
+import SectionHeader from "../components/atoms/headers/SectionHeader";
+import AddTaskForm from "../components/AddTaskForm/AddTaskForm";
+import DoubleColumnGrid from "../layout/DoubleColumnGrid";
 
 // Layouts
-import SingleTaskView from "./layout/SingleTaskView";
+import SingleTaskView from "../layout/SingleTaskView";
 
 // Libraries
 import axios from "axios";
