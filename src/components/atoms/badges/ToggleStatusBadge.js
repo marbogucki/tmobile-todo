@@ -31,13 +31,14 @@ const badgeStyle = (done) => css`
 const ToggleStatusBadge = ({ task }) => {
   const [isLoading, setIsloading] = useState(false);
   const { id, done } = task;
+  const singleTaskApiUrl = `${tasksAPIUrl}/${id}`;
   const onClickHandler = () => {
     const newTaskData = {
       ...task,
       done: !done,
     };
-
-    axiosHTTPCall("put", tasksAPIUrl, newTaskData, setIsloading);
+    console.log(newTaskData);
+    axiosHTTPCall("patch", singleTaskApiUrl, newTaskData, setIsloading);
   };
 
   return (

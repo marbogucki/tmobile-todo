@@ -1,5 +1,5 @@
 // Libs
-import React, { useState, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
 
@@ -14,8 +14,12 @@ import Checkbox from "../atoms/inputs/Checkbox";
 // Authorization
 import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 
+// Context
+import TasksContext from "../../context/TasksContext";
+
 /** @jsx jsx */
 
+// Styles
 const formWrapper = css`
   @media screen and (max-width: 768px) {
     padding: 1.6rem 0;
@@ -52,9 +56,10 @@ const barFormStyle = (isFormToggled) => css`
   }
 `;
 
-const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
+const AddTaskForm = ({ addAlert }) => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const { tasksState, setTasksState } = useContext(TasksContext);
 
   const initialState = {
     title: "",

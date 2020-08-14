@@ -58,15 +58,14 @@ const DeleteBtn = ({ btnText, modalText, id, removeItemFromState }) => {
 
   const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const [isRedirected, setIsredirected] = useState(false);
+
   const deleteItem = async (id) => {
     try {
       setIsloading(true);
       const taskURL = `${tasksAPIUrl}/${id}`;
       await axios.delete(taskURL, httpHeader);
-
-      removeItemFromState(id);
       setIsloading(false);
-      // return <Redirect to="/" />;
     } catch (error) {
       console.log(error);
       setIsloading(false);

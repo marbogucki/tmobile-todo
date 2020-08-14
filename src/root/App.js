@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 // Custome hooks
 import useAlerts from "../hooks/useAlerts";
 import useAxiosGetCall from "../hooks/useAxiosGetCall";
+
+// Context
+import TasksContext from "../context/TasksContext";
 
 // Components
 import MainContainer from "../components/MainContainer/MainContainer";
@@ -55,17 +58,15 @@ function App() {
       <Global styles={globalStyles} />
       <Router>
         <MainContainer alerts={alerts}>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <LandingPageView
-                addAlert={addAlert}
-                tasksState={tasksState}
-                setTasksState={setTasksState}
-              />
-            )}
-          />
+          <TasksContext.Provider
+            value={{ tasksState: tasksState, setTasksState }}
+          >
+            <Route
+              path="/"
+              exact
+              render={() => <LandingPageView addAlert={addAlert} />}
+            />
+          </TasksContext.Provider>
           <Route
             path="/tasks/:id"
             exact
