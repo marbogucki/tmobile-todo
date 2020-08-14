@@ -14,7 +14,7 @@ import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormBut
 // Authorization
 import { tasksAPIUrl } from "../auth/tasksAPISettings";
 
-const SingleTaskView = ({ match, taskUpdateHandler }) => {
+const SingleTaskView = ({ match }) => {
   const [taskData, setTaskData] = useState({});
   const [isLoading, setIsloading] = useState(false);
   const {
