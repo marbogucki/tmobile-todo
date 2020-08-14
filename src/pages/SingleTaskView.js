@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-// Libraries
-import axios from "axios";
+import React, { useState } from "react";
 
 // Custome Hooks
 import useAxiosGetCall from "../hooks/useAxiosGetCall";
@@ -15,7 +12,7 @@ import DeleteButton from "../components/atoms/buttons/DeleteButton";
 import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
 
 // Authorization
-import { tasksAPIUrl, httpHeader } from "../auth/tasksAPISettings";
+import { tasksAPIUrl } from "../auth/tasksAPISettings";
 
 const SingleTaskView = ({ match, taskUpdateHandler }) => {
   const [taskData, setTaskData] = useState({});
@@ -25,7 +22,7 @@ const SingleTaskView = ({ match, taskUpdateHandler }) => {
   } = match;
   const singleTaskAPIUrl = `${tasksAPIUrl}/${id}`;
 
-  useAxiosGetCall(singleTaskAPIUrl, httpHeader, setIsloading, (data) => {
+  useAxiosGetCall(singleTaskAPIUrl, setIsloading, (data) => {
     setTaskData(data);
   });
 

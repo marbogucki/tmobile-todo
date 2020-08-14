@@ -1,24 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 // Libraries
 import axios from "axios";
 
-const httpCall = async (tasksAPIUrl, httpHeader, setIsloading, callback) => {
-  try {
-    setIsloading(true);
-    const { data } = await axios.get(tasksAPIUrl, httpHeader);
-    callback(data);
-    setIsloading(false);
-  } catch (error) {
-    setIsloading(false);
-    console.log(error);
-  }
-};
+// Utils
+import axiosHTTPCall from "../utils/httpAxiosCalls/axiosHTTPCall";
 
-const useAxiosCall = (tasksAPIUrl, httpHeader, setIsloading, callback) => {
+// Authorization
+import { httpHeader } from "../auth/tasksAPISettings";
+
+const useAxiosGetCall = (tasksAPIUrl, setIsloading, callback) => {
   useEffect(() => {
-    httpCall(tasksAPIUrl, httpHeader, setIsloading, callback);
+    axiosHTTPCall("get", tasksAPIUrl, setIsloading, callback);
   }, []);
 };
 
-export default useAxiosCall;
+export default useAxiosGetCall;

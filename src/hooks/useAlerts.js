@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const useAlerts = (alerts, removeAlert) => {
   const lastTimeout = useRef(null);

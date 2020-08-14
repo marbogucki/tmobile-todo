@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Custome hooks
 import useAlerts from "../hooks/useAlerts";
@@ -28,7 +28,7 @@ function App() {
   const [isLoading, setIsloading] = useState(false);
   const [alerts, setAlerts] = useState([]);
 
-  useAxiosGetCall(tasksAPIUrl, httpHeader, setIsloading, (data) => {
+  useAxiosGetCall(tasksAPIUrl, setIsloading, (data) => {
     setTasksState(data);
   });
 
