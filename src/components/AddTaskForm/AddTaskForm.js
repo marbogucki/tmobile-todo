@@ -62,7 +62,6 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("form state:", formState);
     setIsloading(true);
     axios
       .post("https://jarzebak.eu/dawid/tasks", formState, {
@@ -98,7 +97,6 @@ const AddTaskForm = ({ tasksState, setTasksState, addAlert }) => {
       event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
-    console.log(value);
     setFormState({
       ...formState,
       [name]: value,

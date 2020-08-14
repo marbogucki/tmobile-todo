@@ -13,15 +13,32 @@ import Checkbox from "../atoms/inputs/Checkbox";
 /** @jsx jsx */
 
 const formWrapper = css`
+  /* position: relative; */
   @media screen and (max-width: 768px) {
     padding: 1.6rem 0;
   }
 `;
 
 const barFormStyle = (isFormToggled) => css`
+  position: absolute;
+  left: 50%;
+  top: 16rem;
+  transform: translate(-50%, -50%);
+  max-width: 1170px;
   background-color: #fff;
   display: flex;
   margin-bottom: 4rem;
+  background-color: #fff;
+  display: ${isFormToggled ? "block" : "none"};
+  padding: 4rem;
+  border-radius: 16px;
+  box-shadow: -1px 1px 21px 10px rgba(240, 243, 248, 1);
+
+  width: calc(100vw - 32px);
+  @media screen and (max-width: 768px) {
+    top: 16rem;
+    left: 0;
+  }
   & > .inputWrapper {
     margin-right: 1.6rem;
   }
@@ -29,14 +46,6 @@ const barFormStyle = (isFormToggled) => css`
     margin-right: 1.6rem;
   }
 
-  position: absolute;
-  background-color: #fff;
-  display: ${isFormToggled ? "block" : "none"};
-  padding: 4rem;
-  border-radius: 16px;
-  box-shadow: -1px 1px 21px 10px rgba(240, 243, 248, 1);
-  left: 16px;
-  width: calc(100vw - 32px);
   & > .input-slider-wrapper {
     margin-bottom: 2rem;
   }
@@ -47,21 +56,34 @@ const barFormStyle = (isFormToggled) => css`
   }
 `;
 
-const EditTaskFormButton = ({ tasksState, setTasksState, addAlert }) => {
+const editButtonStyle = css`
+  background-color: #3fbe90;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: inline-block;
+`;
+
+const EditTaskFormButton = ({
+  tasksState,
+  taskData,
+  setTasksState,
+  addAlert,
+}) => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
 
   const initialState = {
-    title: "",
-    description: "",
-    done: false,
+    ...taskData,
   };
 
   const [formState, setFormState] = useState(initialState);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("form state:", formState);
     setIsloading(true);
     axios
       .post("https://jarzebak.eu/dawid/tasks", formState, {
@@ -97,7 +119,6 @@ const EditTaskFormButton = ({ tasksState, setTasksState, addAlert }) => {
       event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
-    console.log(value);
     setFormState({
       ...formState,
       [name]: value,
@@ -110,10 +131,9 @@ const EditTaskFormButton = ({ tasksState, setTasksState, addAlert }) => {
   };
   return (
     <div css={formWrapper}>
-      <ToggleFormButton
-        buttonText="Edit"
-        onClickHandler={toggleMobileFormHandler}
-      />
+      <button onClick={toggleMobileFormHandler} css={editButtonStyle}>
+        Edit
+      </button>
 
       <form css={barFormStyle(isMobileFormToggled)} onSubmit={onSubmitHandler}>
         {isLoading ? (
@@ -140,7 +160,7 @@ const EditTaskFormButton = ({ tasksState, setTasksState, addAlert }) => {
               type={"text"}
               name={"description"}
               labelText={"task description"}
-              value={formState.sizeX}
+              value={formState.description}
               onChange={onChangeHandler}
             />
             <FormButton btnText="Edit task" />{" "}

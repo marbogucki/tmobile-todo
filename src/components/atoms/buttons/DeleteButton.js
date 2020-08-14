@@ -15,6 +15,7 @@ const buttonStyle = css`
   color: #fff;
   cursor: pointer;
   padding: 0.8rem;
+  display: inline-block;
 `;
 
 const modalStyle = css`

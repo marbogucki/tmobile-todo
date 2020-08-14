@@ -53,7 +53,6 @@ const Header = () => {
   const [isNavToggled, setIsNavToggled] = useState(false);
   const onToggleHandler = () => {
     setIsNavToggled(!isNavToggled);
-    console.log(isNavToggled);
   };
 
   const navbarStyle = css`
@@ -94,7 +93,7 @@ const Header = () => {
     <header css={headerStyle}>
       <nav css={navbarStyle}>
         <button onClick={onToggleHandler} css={toggleBtnStyle}>
-          <img src="navbar/icons8-menu.svg" />
+          <img src="/navbar/icons8-menu.svg" />
         </button>
         <ul>
           <li>

@@ -9,10 +9,9 @@ import SectionHeader from "../components/atoms/headers/SectionHeader";
 import ToggleStatusBadge from "../components/atoms/badges/ToggleStatusBadge";
 import TaskDescriptionPar from "../components/atoms/paragraphs/TaskDescriptionPar";
 import DeleteButton from "../components/atoms/buttons/DeleteButton";
-// import EditTaskButton from "../components/atoms/buttons/EditTaskButton";
 import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
 
-const SingleTaskView = ({ match }) => {
+const SingleTaskView = ({ match, taskUpdateHandler }) => {
   const [taskData, setTaskData] = useState({});
   const {
     params: { id },
@@ -46,10 +45,13 @@ const SingleTaskView = ({ match }) => {
 
   const { title, description, done } = taskData;
 
-  console.log(taskData);
   return (
     <Dashboard>
-      <ToggleStatusBadge isTaskDone={done} />
+      <ToggleStatusBadge
+        isTaskDone={done}
+        taskUpdateHandler={taskUpdateHandler}
+        id={id}
+      />
       <SectionHeader text={`#${id} ${title}`} />
       <TaskDescriptionPar>{description}</TaskDescriptionPar>
       <DeleteButton
@@ -57,7 +59,7 @@ const SingleTaskView = ({ match }) => {
         modalText={`Are you sure you want to delete task #${id}`}
         id={id}
       />
-      <EditTaskFormButton />
+      <EditTaskFormButton taskData={taskData} />
     </Dashboard>
   );
 };

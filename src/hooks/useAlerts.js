@@ -5,7 +5,6 @@ const useAlerts = (alerts, removeAlert) => {
 
   useEffect(() => {
     if (alerts.length > 0) {
-      console.log(alerts);
       clearTimeout(lastTimeout.current);
       const timeoutFn = setTimeout(() => {
         const lastAlertId = alerts[alerts.length - 1].id;

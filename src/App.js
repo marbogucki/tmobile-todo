@@ -49,6 +49,28 @@ function App() {
     }
   };
 
+  const taskUpdateHandler = async (id, newTaskData) => {
+    try {
+      //   setIsloading(true);
+      const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
+      const { data } = await axios.put(taskURL, newTaskData, {
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        auth: {
+          username: "dawid",
+          password: "WAFmkpSI",
+        },
+      });
+      // setTaskData(data);
+      //   setIsloading(false);
+    } catch (error) {
+      //   setIsloading(false);
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     populateTasksListing();
   }, []);
@@ -92,16 +114,27 @@ function App() {
                   <TasksListing
                     headerText={"Tasks in progress"}
                     tasksState={tasksState.filter((task) => !task.done)}
+                    taskUpdateHandler={taskUpdateHandler}
                   />{" "}
                   <TasksListing
                     headerText={"Completed tasks"}
                     tasksState={tasksState.filter((task) => task.done)}
+                    taskUpdateHandler={taskUpdateHandler}
                   />
                 </DoubleColumnGrid>
               </Dashbord>
             )}
           />
-          <Route path="/tasks/:id" component={SingleTaskView} />
+          <Route
+            path="/tasks/:id"
+            exact
+            render={(props) => (
+              <SingleTaskView
+                {...props}
+                taskUpdateHandler={taskUpdateHandler}
+              />
+            )}
+          />
         </MainContainer>
       </Router>
     </div>

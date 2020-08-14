@@ -60,29 +60,7 @@ const linkStyle = css`
   text-decoration: none;
 `;
 
-const TestsListing = ({ tasksState, headerText }) => {
-  console.log(tasksState);
-  const taskUpdateHandler = async (id, newTaskData) => {
-    try {
-      //   setIsloading(true);
-      const taskURL = `https://jarzebak.eu/dawid/tasks/${id}`;
-      const { data } = await axios.put(taskURL, newTaskData, {
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: "dawid",
-          password: "WAFmkpSI",
-        },
-      });
-      // setTaskData(data);
-      //   setIsloading(false);
-    } catch (error) {
-      //   setIsloading(false);
-      console.log(error);
-    }
-  };
+const TestsListing = ({ tasksState, headerText, taskUpdateHandler }) => {
   return (
     <div css={tableWrapper}>
       <SectionHeader text={headerText} />
@@ -106,6 +84,9 @@ const TestsListing = ({ tasksState, headerText }) => {
               <td>
                 <ToggleStatusBadge
                   isTaskDone={done}
+                  id={id}
+                  title={title}
+                  description={description}
                   taskUpdateHandler={taskUpdateHandler}
                 />
               </td>

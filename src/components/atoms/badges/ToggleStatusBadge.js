@@ -22,9 +22,24 @@ const badgeStyle = (isTaskDone) => css`
   }
 `;
 
-const ToggleStatusBadge = ({ isTaskDone, taskUpdateHandler }) => {
+const ToggleStatusBadge = ({
+  isTaskDone,
+  taskUpdateHandler,
+  id,
+  title,
+  description,
+}) => {
+  const onClickHandler = () => {
+    const newTaskData = {
+      title,
+      description,
+      done: !isTaskDone,
+    };
+    taskUpdateHandler(id, newTaskData);
+  };
+
   return (
-    <span onClick={taskUpdateHandler} css={badgeStyle(isTaskDone)}>
+    <span onClick={onClickHandler} css={badgeStyle(isTaskDone)}>
       {isTaskDone ? "done" : "in progress"}
     </span>
   );
