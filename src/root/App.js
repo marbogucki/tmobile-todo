@@ -32,7 +32,6 @@ function App() {
   const [alerts, setAlerts] = useState([]);
 
   const updateOneTaskState = (itemID, newItem) => {
-    console.log(itemID, newItem);
     const findItemIndex = (array, itemID) =>
       array.findIndex((item) => item.id === itemID);
 
@@ -43,6 +42,14 @@ function App() {
     };
 
     setTasksState(getUpdatedArray(tasksState, itemID, newItem));
+  };
+
+  const removeTask = (taskID) => {
+    console.log(taskID);
+    setTasksState(
+      [...tasksState].filter((task) => task.id !== parseInt(taskID))
+    );
+    console.log(tasksState);
   };
 
   useAxiosGetCall(
@@ -78,7 +85,7 @@ function App() {
       <Global styles={globalStyles} />
       <Router>
         <TasksContext.Provider
-          value={{ tasksState, setTasksState, updateOneTaskState }}
+          value={{ tasksState, setTasksState, updateOneTaskState, removeTask }}
         >
           <AlertsContext.Provider value={{ alerts, addAlert, removeAlert }}>
             <MainContainer>

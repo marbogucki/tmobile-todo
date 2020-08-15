@@ -22,10 +22,10 @@ const axiosHTTPCall = async (
     ) {
       axiosCall = axios[HTTPMethod].bind(null, APIUrl, payload, httpHeader);
     }
-
     const { data } = await axiosCall();
-    callback(data);
+    callback(data, null);
     setIsloading(false);
+    return data;
   } catch (error) {
     setIsloading(false);
     console.log(error);

@@ -2,12 +2,16 @@
 import React, { useState, Fragment } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
+
 // Components
 import InputSlider from "../atoms/inputs/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
 import Checkbox from "../atoms/inputs/Checkbox";
+
+// Utils
+import editTaskCall from "../../utils/httpAxiosCalls/editTaskCall";
 
 // Authorization
 import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
@@ -70,12 +74,7 @@ const editButtonStyle = css`
   display: inline-block;
 `;
 
-const EditTaskFormButton = ({
-  tasksState,
-  taskData,
-  setTasksState,
-  addAlert,
-}) => {
+const EditTaskFormButton = ({ taskData }) => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
 
@@ -85,25 +84,10 @@ const EditTaskFormButton = ({
 
   const [formState, setFormState] = useState(initialState);
 
-  const updateTaskCall = async () => {
-    setIsloading(true);
-    try {
-      const { data } = await axios.put(tasksAPIUrl, formState, httpHeader);
-      setIsloading(false);
-      setTasksState([...tasksState, data]);
-    } catch (error) {
-      setIsloading(false);
-      addAlert(
-        "danger",
-        "Ups. Unable to edit task. Check data and try again",
-        3000
-      );
-      console.log(error);
-    }
-  };
-
   const onSubmitHandler = (event) => {
-    updateTaskCall();
+    event.preventDefault();
+    console.log(formState);
+    editTaskCall(formState);
   };
 
   const onChangeHandler = (event) => {
@@ -137,13 +121,13 @@ const EditTaskFormButton = ({
           <Fragment>
             <CloseWindowButton onClickHandler={toggleMobileFormHandler} />
             <Checkbox
-              id="taskStatus"
+              id="editTaskStatus"
               name="done"
               value={formState.done}
               onChange={onChangeHandler}
             />
             <InputSlider
-              id={"taskTitle"}
+              id={"editTaskTitle"}
               type={"text"}
               name={"title"}
               labelText={"task title"}
@@ -151,7 +135,7 @@ const EditTaskFormButton = ({
               onChange={onChangeHandler}
             />
             <InputSlider
-              id={"taskDescription"}
+              id={"editTaskDescription"}
               type={"text"}
               name={"description"}
               labelText={"task description"}

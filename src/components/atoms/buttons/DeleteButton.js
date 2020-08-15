@@ -1,11 +1,13 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
+
+// Context
+import TasksContext from "../../../context/TasksContext";
 
 // Components
 import LoadingCircle from "../loadings/LoadingCircle";
 
 // Libraries
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 import { jsx, css } from "@emotion/core";
 
 // Authorization
@@ -51,21 +53,21 @@ const declineStyle = css`
   background-color: #db2828;
 `;
 
-const DeleteBtn = ({ btnText, modalText, id, removeItemFromState }) => {
+const DeleteBtn = ({ btnText, modalText, id, onTaskDeletionHandler }) => {
   const toggleModalHandler = () => {
     setIsToggled(!isToggled);
   };
 
   const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const [isRedirected, setIsredirected] = useState(false);
 
-  const deleteItem = async (id) => {
+  const deleteItemCall = async (id) => {
     try {
       setIsloading(true);
       const taskURL = `${tasksAPIUrl}/${id}`;
       await axios.delete(taskURL, httpHeader);
       setIsloading(false);
+      onTaskDeletionHandler();
     } catch (error) {
       console.log(error);
       setIsloading(false);
@@ -73,7 +75,7 @@ const DeleteBtn = ({ btnText, modalText, id, removeItemFromState }) => {
   };
 
   const onConfimHandler = () => {
-    deleteItem(id);
+    deleteItemCall(id);
   };
   return (
     <Fragment>

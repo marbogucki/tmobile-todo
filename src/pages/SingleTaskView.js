@@ -14,13 +14,18 @@ import TaskDescriptionPar from "../components/atoms/paragraphs/TaskDescriptionPa
 import DeleteButton from "../components/atoms/buttons/DeleteButton";
 import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
 
+// Libraries
+import { Redirect } from "react-router-dom";
+
 // Authorization
 import { tasksAPIUrl } from "../auth/tasksAPISettings";
 
 const SingleTaskView = ({ match }) => {
   const [taskData, setTaskData] = useState({});
   const [isLoading, setIsloading] = useState(false);
+  const { removeTask } = useContext(TasksContext);
   const { tasksState } = useContext(TasksContext);
+  const [shouldBeRedirected, setShouldBeRedirected] = useState(false);
   const {
     params: { id },
   } = match;
@@ -36,9 +41,16 @@ const SingleTaskView = ({ match }) => {
     [tasksState]
   );
 
-  const { title, description, done } = taskData;
+  const { title, description } = taskData;
 
-  return (
+  const redirectBackToRoot = () => {
+    setShouldBeRedirected(true);
+    removeTask(id);
+  };
+
+  return shouldBeRedirected ? (
+    <Redirect to="/" />
+  ) : (
     <Dashboard>
       <ToggleStatusBadge task={taskData} />
       <SectionHeader text={`#${id} ${title}`} />
@@ -47,10 +59,10 @@ const SingleTaskView = ({ match }) => {
         btnText="Delete task"
         modalText={`Are you sure you want to delete task #${id}`}
         id={id}
+        onTaskDeletionHandler={redirectBackToRoot}
       />
       <EditTaskFormButton taskData={taskData} />
     </Dashboard>
   );
 };
-
 export default SingleTaskView;
