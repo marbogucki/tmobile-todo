@@ -43,7 +43,7 @@ const ToggleStatusBadge = ({ task }) => {
   const editTaskCall = async (payload) => {
     setIsloading(true);
     try {
-      const { data } = await axios.post(tasksAPIUrl, payload, httpHeader);
+      const { data } = await axios.put(singleTaskApiUrl, payload, httpHeader);
       console.log("task response: ", data);
       setIsloading(false);
       updateOneTaskState(id, data);
