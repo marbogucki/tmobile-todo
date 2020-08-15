@@ -29,6 +29,7 @@ const axiosHTTPCall = async (
   } catch (error) {
     setIsloading(false);
     console.log(error);
+    callback(null, error);
   }
 };
 

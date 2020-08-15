@@ -93,7 +93,7 @@ const Header = () => {
     <header css={headerStyle}>
       <nav css={navbarStyle}>
         <button onClick={onToggleHandler} css={toggleBtnStyle}>
-          <img src="/navbar/icons8-menu.svg" />
+          <img alt="Menu" src="/navbar/icons8-menu.svg" />
         </button>
         <ul>
           <li>

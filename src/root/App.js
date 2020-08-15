@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 // Custome hooks
 import useAlerts from "../hooks/useAlerts";
@@ -10,6 +10,7 @@ import AlertsContext from "../context/AlertsContext";
 
 // Components
 import MainContainer from "../components/MainContainer/MainContainer";
+import LoadingCircle from "../components/atoms/loadings/LoadingCircle";
 
 // Pages
 import SingleTaskView from "../pages/SingleTaskView";
@@ -89,7 +90,11 @@ function App() {
         >
           <AlertsContext.Provider value={{ alerts, addAlert, removeAlert }}>
             <MainContainer>
-              <Route path="/" exact component={LandingPageView} />
+              <Route
+                path="/"
+                exact
+                component={isLoading ? LoadingCircle : LandingPageView}
+              />
 
               <Route path="/tasks/:id" exact component={SingleTaskView} />
             </MainContainer>

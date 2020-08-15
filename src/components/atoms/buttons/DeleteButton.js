@@ -1,7 +1,4 @@
-import React, { useState, Fragment, useContext } from "react";
-
-// Context
-import TasksContext from "../../../context/TasksContext";
+import React, { useState, Fragment } from "react";
 
 // Components
 import LoadingCircle from "../loadings/LoadingCircle";

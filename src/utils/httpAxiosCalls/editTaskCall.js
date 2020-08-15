@@ -1,12 +1,7 @@
-import { useContext } from "react";
-
 import axios from "axios";
 
-// Context
-import AlertsContext from "../../context/AlertsContext";
-
 // Authorization
-import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
+import { httpHeader } from "../../auth/tasksAPISettings";
 
 const editTaskCall = async (
   APITaskUrl,

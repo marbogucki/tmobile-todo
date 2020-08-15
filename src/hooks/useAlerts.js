@@ -12,7 +12,7 @@ const useAlerts = (alerts, removeAlert) => {
       }, 3000);
       lastTimeout.current = timeoutFn;
     }
-  }, [alerts]);
+  }, [alerts, removeAlert]);
 };
 
 export default useAlerts;

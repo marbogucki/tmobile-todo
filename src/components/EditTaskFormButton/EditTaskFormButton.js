@@ -1,6 +1,5 @@
 // Libs
 import React, { useState, Fragment, useContext } from "react";
-import axios from "axios";
 import { css, jsx } from "@emotion/core";
 
 // Context
@@ -84,7 +83,7 @@ const EditTaskFormButton = ({ taskData }) => {
   const { updateOneTaskState } = useContext(TaskContext);
   const { addAlert } = useContext(AlertsContext);
 
-  const { id, title, description, done } = taskData;
+  const { id } = taskData;
 
   const taskAPIUrl = `${tasksAPIUrl}/${id}`;
 
@@ -92,14 +91,12 @@ const EditTaskFormButton = ({ taskData }) => {
     title: "",
     description: "",
     done: false,
-    ...taskData,
   };
 
   const [formState, setFormState] = useState(initialState);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("form state is", formState);
     editTaskCall(taskAPIUrl, formState, setIsLoading, addAlert, (data) => {
       updateOneTaskState(id, data);
     });
