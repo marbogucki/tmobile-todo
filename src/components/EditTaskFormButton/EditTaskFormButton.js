@@ -1,7 +1,11 @@
 // Libs
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import axios from "axios";
 import { css, jsx } from "@emotion/core";
+
+// Context
+import TaskContext from "../../context/TasksContext";
+import AlertsContext from "../../context/AlertsContext";
 
 // Components
 import InputSlider from "../atoms/inputs/InputSlider";
@@ -14,7 +18,7 @@ import Checkbox from "../atoms/inputs/Checkbox";
 import editTaskCall from "../../utils/httpAxiosCalls/editTaskCall";
 
 // Authorization
-import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
+import { tasksAPIUrl } from "../../auth/tasksAPISettings";
 
 /** @jsx jsx */
 
@@ -76,9 +80,18 @@ const editButtonStyle = css`
 
 const EditTaskFormButton = ({ taskData }) => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { updateOneTaskState } = useContext(TaskContext);
+  const { addAlert } = useContext(AlertsContext);
+
+  const { id, title, description, done } = taskData;
+
+  const taskAPIUrl = `${tasksAPIUrl}/${id}`;
 
   const initialState = {
+    title: "",
+    description: "",
+    done: false,
     ...taskData,
   };
 
@@ -86,8 +99,10 @@ const EditTaskFormButton = ({ taskData }) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(formState);
-    editTaskCall(formState);
+    console.log("form state is", formState);
+    editTaskCall(taskAPIUrl, formState, setIsLoading, addAlert, (data) => {
+      updateOneTaskState(id, data);
+    });
   };
 
   const onChangeHandler = (event) => {
