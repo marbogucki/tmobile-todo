@@ -16,6 +16,7 @@ import ToggleStatusBadge from "../components/atoms/badges/ToggleStatusBadge";
 import TaskDescriptionPar from "../components/atoms/paragraphs/TaskDescriptionPar";
 import DeleteButton from "../components/atoms/buttons/DeleteButton";
 import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
+import LoadingCircle from "../components/atoms/loadings/LoadingCircle";
 
 // Libraries
 import { Redirect } from "react-router-dom";
@@ -75,7 +76,7 @@ const SingleTaskView = ({ match }) => {
     if (shouldBeRedirected) {
       return <Redirect to="/" />;
     } else if (isLoading) {
-      return <h1>Loading..</h1>;
+      return <LoadingCircle />;
     } else if (wasContentNotFound) {
       return (
         <PageNotFoundView pageTitle={`Task with id #${id}, was not found`} />
