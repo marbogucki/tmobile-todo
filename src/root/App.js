@@ -31,6 +31,19 @@ function App() {
   const [isLoading, setIsloading] = useState(false);
   const [alerts, setAlerts] = useState([]);
 
+  const updateOneTaskState = (itemID, newItem) => {
+    const findItemIndex = (array, itemID) =>
+      array.findIndex((item) => item.id === itemID);
+
+    const getUpdatedArray = (array, itemID, newItem) => {
+      const arrayCopy = JSON.parse(JSON.stringify(array));
+      arrayCopy.splice(findItemIndex(arrayCopy, itemID), 1, newItem);
+      return arrayCopy;
+    };
+
+    setTasksState(getUpdatedArray(tasksState, itemID, newItem));
+  };
+
   useAxiosGetCall(tasksAPIUrl, setIsloading, (data) => {
     setTasksState(data);
   });
@@ -61,7 +74,7 @@ function App() {
         <AlertsContext.Provider value={{ alerts, addAlert, removeAlert }}>
           <MainContainer>
             <TasksContext.Provider
-              value={{ tasksState: tasksState, setTasksState }}
+              value={{ tasksState, setTasksState, updateOneTaskState }}
             >
               <Route path="/" exact component={LandingPageView} />
             </TasksContext.Provider>

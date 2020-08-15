@@ -19,6 +19,7 @@ const axiosHTTPCall = async (
     } else {
       axiosCall = axios[HTTPMethod].bind(null, APIUrl, payload, httpHeader);
     }
+    console.log("payload from http is:", payload);
     const { data } = await axiosCall();
     callback(data);
     setIsloading(false);
