@@ -17,6 +17,7 @@ import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 
 const formWrapper = css`
   /* position: relative; */
+  display: inline-block;
   @media screen and (max-width: 768px) {
     padding: 1.6rem 0;
   }

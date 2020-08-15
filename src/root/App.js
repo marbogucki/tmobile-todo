@@ -44,9 +44,14 @@ function App() {
     setTasksState(getUpdatedArray(tasksState, itemID, newItem));
   };
 
-  useAxiosGetCall(tasksAPIUrl, setIsloading, (data) => {
-    setTasksState(data);
-  });
+  useAxiosGetCall(
+    tasksAPIUrl,
+    setIsloading,
+    (data) => {
+      setTasksState(data);
+    },
+    []
+  );
 
   const removeAlert = (id) => {
     setAlerts([...alerts].filter((alert) => alert.id !== id));
@@ -71,16 +76,17 @@ function App() {
     <div className="App">
       <Global styles={globalStyles} />
       <Router>
-        <AlertsContext.Provider value={{ alerts, addAlert, removeAlert }}>
-          <MainContainer>
-            <TasksContext.Provider
-              value={{ tasksState, setTasksState, updateOneTaskState }}
-            >
+        <TasksContext.Provider
+          value={{ tasksState, setTasksState, updateOneTaskState }}
+        >
+          <AlertsContext.Provider value={{ alerts, addAlert, removeAlert }}>
+            <MainContainer>
               <Route path="/" exact component={LandingPageView} />
-            </TasksContext.Provider>
-            <Route path="/tasks/:id" exact component={SingleTaskView} />
-          </MainContainer>
-        </AlertsContext.Provider>
+
+              <Route path="/tasks/:id" exact component={SingleTaskView} />
+            </MainContainer>
+          </AlertsContext.Provider>
+        </TasksContext.Provider>
       </Router>
     </div>
   );

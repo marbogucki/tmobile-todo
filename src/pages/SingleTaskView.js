@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 // Custome Hooks
 import useAxiosGetCall from "../hooks/useAxiosGetCall";
+
+// Context
+import TasksContext from "../context/TasksContext";
 
 // Components
 import Dashboard from "../components/Dashboard/Dashboard";
@@ -17,15 +20,21 @@ import { tasksAPIUrl } from "../auth/tasksAPISettings";
 const SingleTaskView = ({ match }) => {
   const [taskData, setTaskData] = useState({});
   const [isLoading, setIsloading] = useState(false);
+  const { tasksState } = useContext(TasksContext);
   const {
     params: { id },
   } = match;
 
   const singleTaskAPIUrl = `${tasksAPIUrl}/${id}`;
 
-  useAxiosGetCall(singleTaskAPIUrl, setIsloading, (data) => {
-    setTaskData(data);
-  });
+  useAxiosGetCall(
+    singleTaskAPIUrl,
+    setIsloading,
+    (data) => {
+      setTaskData(data);
+    },
+    [tasksState]
+  );
 
   const { title, description, done } = taskData;
 

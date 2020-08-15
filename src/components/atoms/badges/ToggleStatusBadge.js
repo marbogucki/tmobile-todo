@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react";
 
+// Components
+import LoadingCircle from "../loadings/LoadingCircle";
+
 // Libraries
 import { css, jsx } from "@emotion/core";
 import axios from "axios";
@@ -35,9 +38,10 @@ const badgeStyle = (done) => css`
 
 const ToggleStatusBadge = ({ task }) => {
   const [isLoading, setIsloading] = useState(false);
+  const { updateOneTaskState } = useContext(TasksContext);
+  const { addAlert } = useContext(AlertsContext);
   const { id, done } = task;
 
-  const { updateOneTaskState } = useContext(TasksContext);
   const singleTaskApiUrl = `${tasksAPIUrl}/${id}`;
 
   const editTaskCall = async (payload) => {
@@ -47,14 +51,13 @@ const ToggleStatusBadge = ({ task }) => {
       console.log("task response: ", data);
       setIsloading(false);
       updateOneTaskState(id, data);
-      // setTasksState([...tasksState, data]);
     } catch (error) {
-      // setIsloading(false);
-      // addAlert(
-      //   "danger",
-      //   "Ups. Unable to add task. Check data and try again",
-      //   3000
-      // );
+      setIsloading(false);
+      addAlert(
+        "danger",
+        "Ups. Unable to add task. Check data and try again",
+        3000
+      );
       console.log(error);
     }
   };
@@ -76,11 +79,12 @@ const ToggleStatusBadge = ({ task }) => {
     // );
   };
 
-  return (
+  return isLoading ? (
+    <LoadingCircle />
+  ) : (
     <span onClick={onClickHandler} css={badgeStyle(done)}>
       {done ? "done" : "in progress"}
     </span>
   );
 };
-
 export default ToggleStatusBadge;
