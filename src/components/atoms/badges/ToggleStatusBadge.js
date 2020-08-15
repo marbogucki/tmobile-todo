@@ -5,17 +5,16 @@ import LoadingCircle from "../loadings/LoadingCircle";
 
 // Libraries
 import { css, jsx } from "@emotion/core";
-import axios from "axios";
 
 // Context
 import AlertsContext from "../../../context/AlertsContext";
 import TasksContext from "../../../context/TasksContext";
 
 // Utils
-import axiosHTTPCall from "../../../utils/httpAxiosCalls/axiosHTTPCall";
+import editTaskCall from "../../../utils/httpAxiosCalls/editTaskCall";
 
 // Authorization
-import { tasksAPIUrl, httpHeader } from "../../../auth/tasksAPISettings";
+import { tasksAPIUrl } from "../../../auth/tasksAPISettings";
 
 /** @jsx jsx */
 
@@ -44,39 +43,19 @@ const ToggleStatusBadge = ({ task }) => {
 
   const singleTaskApiUrl = `${tasksAPIUrl}/${id}`;
 
-  const editTaskCall = async (payload) => {
-    setIsloading(true);
-    try {
-      const { data } = await axios.put(singleTaskApiUrl, payload, httpHeader);
-      console.log("task response: ", data);
-      setIsloading(false);
-      updateOneTaskState(id, data);
-    } catch (error) {
-      setIsloading(false);
-      addAlert(
-        "danger",
-        "Ups. Unable to add task. Check data and try again",
-        3000
-      );
-      console.log(error);
-    }
-  };
   const onClickHandler = () => {
     const newTaskData = {
-      ...task,
       done: !done,
     };
-    editTaskCall(newTaskData);
-    // console.log(newTaskData);
-    // axiosHTTPCall(
-    //   "patch",
-    //   singleTaskApiUrl,
-    //   newTaskData,
-    //   setIsloading,
-    //   (data) => {
-    //     console.log(data);
-    //   }
-    // );
+    editTaskCall(
+      singleTaskApiUrl,
+      newTaskData,
+      setIsloading,
+      addAlert,
+      (updatedTaskData) => {
+        updateOneTaskState(updatedTaskData.id, updatedTaskData);
+      }
+    );
   };
 
   return isLoading ? (

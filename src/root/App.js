@@ -32,6 +32,7 @@ function App() {
   const [alerts, setAlerts] = useState([]);
 
   const updateOneTaskState = (itemID, newItem) => {
+    console.log(itemID, newItem);
     const findItemIndex = (array, itemID) =>
       array.findIndex((item) => item.id === itemID);
 

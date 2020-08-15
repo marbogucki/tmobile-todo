@@ -19,7 +19,6 @@ const mainContainerStyle = css`
 
 const MainContainer = ({ children }) => {
   const { alerts, removeAlert } = useContext(AlertsContext);
-  console.log(alerts);
   return (
     <Fragment>
       <Header />

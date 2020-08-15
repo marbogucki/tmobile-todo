@@ -13,13 +13,16 @@ const axiosHTTPCall = async (
   try {
     setIsloading(true);
     let axiosCall;
-    // create new function for axios call with saved params
-    if (HTTPMethod === "get" || "delete") {
+    if (HTTPMethod === "get" || HTTPMethod === "delete") {
       axiosCall = axios[HTTPMethod].bind(null, APIUrl, httpHeader);
-    } else {
+    } else if (
+      HTTPMethod === "put" ||
+      HTTPMethod === "patch" ||
+      HTTPMethod === "post"
+    ) {
       axiosCall = axios[HTTPMethod].bind(null, APIUrl, payload, httpHeader);
     }
-    console.log("payload from http is:", payload);
+
     const { data } = await axiosCall();
     callback(data);
     setIsloading(false);
