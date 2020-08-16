@@ -12,7 +12,15 @@ import {
 
 /** @jsx jsx */
 
-const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
+const InputSlider = ({
+  id,
+  type,
+  name,
+  labelText,
+  value,
+  onChange,
+  required,
+}) => {
   return (
     <div
       className="input-slider-wrapper"
@@ -27,6 +35,7 @@ const InputSlider = ({ id, type, name, labelText, value, onChange }) => {
         name={name}
         value={value}
         placeholder=" "
+        required={required}
       />
       <label css={labelStyle} htmlFor={id}>
         {labelText}

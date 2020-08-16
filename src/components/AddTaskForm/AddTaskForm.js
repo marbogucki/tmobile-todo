@@ -18,48 +18,14 @@ import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 import { TasksContext } from "../../context/TasksContext";
 import { AlertsContext } from "../../context/AlertsContext";
 
-/** @jsx jsx */
-
 // Styles
-const formWrapper = css`
-  @media screen and (max-width: 768px) {
-    padding: 1.6rem 0;
-  }
-`;
+import { formWrapper, barFormStyle } from "./style/AddTaskFormStyle";
 
-const barFormStyle = (isFormToggled) => css`
-  background-color: #fff;
-  display: flex;
-  margin-bottom: 4rem;
-  & > .inputWrapper {
-    margin-right: 1.6rem;
-  }
-  & > .input-slider-wrapper {
-    margin-right: 1.6rem;
-  }
-  @media screen and (max-width: 768px) {
-    position: absolute;
-    background-color: #fff;
-    display: ${isFormToggled ? "block" : "none"};
-    padding: 4rem;
-    border-radius: 16px;
-    box-shadow: -1px 1px 21px 10px rgba(240, 243, 248, 1);
-    left: 16px;
-    width: calc(100vw - 32px);
-    & > .input-slider-wrapper {
-      margin-bottom: 2rem;
-    }
-    & > .close-window-btn {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-    }
-  }
-`;
+/** @jsx jsx */
 
 const AddTaskForm = () => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { tasksState, setTasksState } = useContext(TasksContext);
   const { addAlert } = useContext(AlertsContext);
 
@@ -72,13 +38,13 @@ const AddTaskForm = () => {
   const [formState, setFormState] = useState(initialState);
 
   const postNewTaskCall = async (formState, tasksState) => {
-    setIsloading(true);
+    setIsLoading(true);
     try {
       const { data } = await axios.post(tasksAPIUrl, formState, httpHeader);
-      setIsloading(false);
+      setIsLoading(false);
       setTasksState([...tasksState, data]);
     } catch (error) {
-      setIsloading(false);
+      setIsLoading(false);
       addAlert(
         "danger",
         "Ups. Unable to add task. Check data and try again",
@@ -111,7 +77,7 @@ const AddTaskForm = () => {
     setIsMobileFormToggled(!isMobileFormToggled);
   };
   return (
-    <div css={formWrapper}>
+    <div css={formWrapper} data-testid="add-task-form">
       <ToggleFormButton
         buttonText="New task"
         onClickHandler={toggleMobileFormHandler}
@@ -136,6 +102,7 @@ const AddTaskForm = () => {
               labelText={"task title"}
               value={formState.title}
               onChange={onChangeHandler}
+              required={true}
             />
             <InputSlider
               id={"taskDescription"}
@@ -145,7 +112,7 @@ const AddTaskForm = () => {
               value={formState.description}
               onChange={onChangeHandler}
             />
-            <FormButton btnText="Add task" />{" "}
+            <FormButton btnText="Add task" data-testid="submit-btn" />{" "}
           </Fragment>
         )}
       </form>
