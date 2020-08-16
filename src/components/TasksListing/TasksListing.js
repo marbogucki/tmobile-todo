@@ -40,10 +40,6 @@ const TestsListing = ({ tasks, headerText }) => {
     setCurrentPage(pageNumber);
   };
 
-  const sortItemsHandler = (currentDirection, byValue) => {
-    const newDirection = "desc" ? "asc" : "desc";
-  };
-
   return (
     <div css={tableWrapper}>
       <SectionHeader text={headerText} />
