@@ -24,11 +24,26 @@ import {
 
 const TestsListing = ({ tasksState, headerText }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const tasksPerPage = 5;
+
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = [...tasksState].slice(indexOfFirstTask, indexOfLastTask);
+
+  const paginationOnClickHandler = (event, pageNumber) => {
+    event.preventDefault();
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div css={tableWrapper}>
       <SectionHeader text={headerText} />
+      <PaginationNav
+        itemsPerPage={tasksPerPage}
+        totalNumberOfItems={tasksState.length}
+        paginationOnClickHandler={paginationOnClickHandler}
+        currentPage={currentPage}
+      />
       <table css={tableStyle}>
         <thead>
           <tr>
@@ -39,7 +54,7 @@ const TestsListing = ({ tasksState, headerText }) => {
           </tr>
         </thead>
         <tbody>
-          {tasksState.map((task) => (
+          {currentTasks.map((task) => (
             <tr css={rowStyle} key={task.id}>
               <td css={linkStyle}>
                 <Link
@@ -56,7 +71,6 @@ const TestsListing = ({ tasksState, headerText }) => {
           ))}
         </tbody>
       </table>
-      <PaginationNav />
     </div>
   );
 };
