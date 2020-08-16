@@ -7,7 +7,7 @@ import LoadingCircle from "../loadings/LoadingCircle";
 import { css, jsx } from "@emotion/core";
 
 // Context
-import AlertsContext from "../../../context/AlertsContext";
+import { AlertsContext } from "../../../context/AlertsContext";
 import TasksContext from "../../../context/TasksContext";
 
 // Utils
@@ -61,7 +61,11 @@ const ToggleStatusBadge = ({ task }) => {
   return isLoading ? (
     <LoadingCircle />
   ) : (
-    <span onClick={onClickHandler} css={badgeStyle(done)}>
+    <span
+      data-testid="toggle-status-badge"
+      onClick={onClickHandler}
+      css={badgeStyle(done)}
+    >
       {done ? "done" : "in progress"}
     </span>
   );

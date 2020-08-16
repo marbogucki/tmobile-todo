@@ -16,7 +16,7 @@ import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 
 // Context
 import TasksContext from "../../context/TasksContext";
-import AlertsContext from "../../context/AlertsContext";
+import { AlertsContext } from "../../context/AlertsContext";
 
 /** @jsx jsx */
 

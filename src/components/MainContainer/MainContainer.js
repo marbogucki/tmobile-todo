@@ -8,7 +8,7 @@ import Header from "../Header/Header";
 import BarAlert from "../atoms/alerts/BarAlert";
 
 // Context
-import AlertsContext from "../../context/AlertsContext";
+import { AlertsContext } from "../../context/AlertsContext";
 
 /** @jsx jsx */
 const mainContainerStyle = css`

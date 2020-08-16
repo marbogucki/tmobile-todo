@@ -4,7 +4,7 @@ import { css, jsx } from "@emotion/core";
 
 // Context
 import TaskContext from "../../context/TasksContext";
-import AlertsContext from "../../context/AlertsContext";
+import { AlertsContext } from "../../context/AlertsContext";
 
 // Components
 import InputSlider from "../atoms/inputs/InputSlider";
