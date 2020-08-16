@@ -1,20 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1`] = `
-<div
-  className="css-5007zv-BarAlert"
-  data-testid="bar-alert"
->
-  Warning, something went wrong
-  <span
-    className="css-166am21-BarAlert"
-    onClick={[Function]}
-  >
-    X
-  </span>
-</div>
-`;
-
 exports[`matches snapshot 1 1`] = `
 <div
   className="css-5007zv-BarAlert"

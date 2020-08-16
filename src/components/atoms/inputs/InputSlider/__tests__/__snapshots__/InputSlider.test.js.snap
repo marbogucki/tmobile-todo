@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<div
+  className="input-slider-wrapper css-1lncui6-InputSlider"
+  data-testid="input-slider"
+>
+  <input
+    className="css-1wvyecb-InputSlider"
+    placeholder=" "
+  />
+  <label
+    className="css-f515j6-InputSlider"
+  />
+</div>
+`;

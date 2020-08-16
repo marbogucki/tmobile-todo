@@ -3,15 +3,15 @@ import React, { useState, Fragment, useContext } from "react";
 import { css, jsx } from "@emotion/core";
 
 // Context
-import TaskContext from "../../context/TasksContext";
+import { TasksContext } from "../../context/TasksContext";
 import { AlertsContext } from "../../context/AlertsContext";
 
 // Components
-import InputSlider from "../atoms/inputs/InputSlider";
+import InputSlider from "../atoms/inputs/InputSlider/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
-import Checkbox from "../atoms/inputs/Checkbox";
+import Checkbox from "../atoms/inputs/Checkbox/Checkbox";
 
 // Utils
 import editTaskCall from "../../utils/httpAxiosCalls/editTaskCall";
@@ -80,7 +80,7 @@ const editButtonStyle = css`
 const EditTaskFormButton = ({ taskData }) => {
   const [isMobileFormToggled, setIsMobileFormToggled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { updateOneTaskState } = useContext(TaskContext);
+  const { updateOneTaskState } = useContext(TasksContext);
   const { addAlert } = useContext(AlertsContext);
 
   const { id } = taskData;

@@ -8,7 +8,7 @@ import AddTaskForm from "../components/AddTaskForm/AddTaskForm";
 import DoubleColumnGrid from "../layout/DoubleColumnGrid";
 
 // Context
-import TasksContext from "../context/TasksContext";
+import { TasksContext } from "../context/TasksContext";
 
 const LandingPageView = () => {
   const { tasksState } = useContext(TasksContext);

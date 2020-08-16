@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 import useAxiosGetCall from "../hooks/useAxiosGetCall";
 
 // Context
-import TasksContext from "../context/TasksContext";
+import { TasksContext } from "../context/TasksContext";
 
 // Pages
 import PageNotFoundView from "./PageNotFoundView";

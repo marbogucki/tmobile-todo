@@ -1,5 +1,3 @@
-import React from "react";
-
 // Libraries
 import { css, jsx } from "@emotion/core";
 
@@ -23,23 +21,4 @@ const inputStyle = css`
   display: none;
 `;
 
-const Checkbox = ({ id, name, value, onChange }) => {
-  return (
-    <div className="input-slider-wrapper">
-      <input
-        onChange={onChange}
-        css={inputStyle}
-        id={id}
-        type="checkbox"
-        name={name}
-        value={value}
-        placeholder=" "
-      />
-      <label css={labelStyle(value)} htmlFor={id}>
-        {value ? "done" : "in progress"}
-      </label>
-    </div>
-  );
-};
-
-export default Checkbox;
+export { labelStyle, inputStyle };

@@ -4,18 +4,18 @@ import axios from "axios";
 import { css, jsx } from "@emotion/core";
 
 // Components
-import InputSlider from "../atoms/inputs/InputSlider";
+import InputSlider from "../atoms/inputs/InputSlider/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
 import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
 import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
-import Checkbox from "../atoms/inputs/Checkbox";
+import Checkbox from "../atoms/inputs/Checkbox/Checkbox";
 
 // Authorization
 import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 
 // Context
-import TasksContext from "../../context/TasksContext";
+import { TasksContext } from "../../context/TasksContext";
 import { AlertsContext } from "../../context/AlertsContext";
 
 /** @jsx jsx */

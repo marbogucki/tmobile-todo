@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<span
+  className="css-mozazn-ToggleStatusBadge"
+  data-testid="toggle-status-badge"
+  onClick={[Function]}
+>
+  in progress
+</span>
+`;

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<div
+  className="input-slider-wrapper"
+  data-testid="checkbox"
+>
+  <input
+    className="css-cg9o93-Checkbox"
+    id="form-input-id"
+    name="task-status"
+    onChange={[Function]}
+    placeholder=" "
+    type="checkbox"
+    value={false}
+  />
+  <label
+    className="css-174x1gu-Checkbox"
+    htmlFor="form-input-id"
+  >
+    in progress
+  </label>
+</div>
+`;
