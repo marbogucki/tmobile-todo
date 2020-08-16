@@ -11,6 +11,7 @@ import PaginationNav from "../PaginationNav/PaginationNav";
 
 // Utils
 import curlText from "../../utils/curlText";
+import sortItems from "../../utils/sortItems";
 
 // Styles
 import {
@@ -22,17 +23,25 @@ import {
 
 /** @jsx jsx */
 
-const TestsListing = ({ tasksState, headerText }) => {
+const TestsListing = ({ tasks, headerText }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 5;
 
   const indexOfLastTask = currentPage * tasksPerPage;
   const indexOfFirstTask = indexOfLastTask - tasksPerPage;
-  const currentTasks = [...tasksState].slice(indexOfFirstTask, indexOfLastTask);
+  const numberOfTasks = tasks.length;
 
+  const currentTasks = sortItems([...tasks], "id", "desc").slice(
+    indexOfFirstTask,
+    indexOfLastTask
+  );
   const paginationOnClickHandler = (event, pageNumber) => {
     event.preventDefault();
     setCurrentPage(pageNumber);
+  };
+
+  const sortItemsHandler = (currentDirection, byValue) => {
+    const newDirection = "desc" ? "asc" : "desc";
   };
 
   return (
@@ -40,7 +49,7 @@ const TestsListing = ({ tasksState, headerText }) => {
       <SectionHeader text={headerText} />
       <PaginationNav
         itemsPerPage={tasksPerPage}
-        totalNumberOfItems={tasksState.length}
+        totalNumberOfItems={numberOfTasks}
         paginationOnClickHandler={paginationOnClickHandler}
         currentPage={currentPage}
       />

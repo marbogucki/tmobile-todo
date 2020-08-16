@@ -22,11 +22,11 @@ const LandingPageView = () => {
       <DoubleColumnGrid>
         <TasksListing
           headerText={"Tasks in progress"}
-          tasksState={getInProgressTasks(tasksState)}
+          tasks={getInProgressTasks(tasksState)}
         />{" "}
         <TasksListing
           headerText={"Completed tasks"}
-          tasksState={getCompletedTasks(tasksState)}
+          tasks={getCompletedTasks(tasksState)}
         />
       </DoubleColumnGrid>
     </Dashbord>
