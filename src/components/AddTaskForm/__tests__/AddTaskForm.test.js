@@ -25,45 +25,14 @@ it("renders AddTaskForm without crashing", () => {
   ReactDOM.unmountComponentAtNode(divContainer);
 });
 
-// describe("form submit", () => {
-//   it("calls the form submit without invalid data", () => {
-//     const { getByTestId, getByRole } = render(
-//       <AlertsProvider>
-//         <AddTaskForm />
-//       </AlertsProvider>
-//     );
-//     expect(getByTestId("submit-btn");
-//   });
-//   // it.todo("calls the form submit with valid data", ()=> {
+it("matches snapshot 1", () => {
+  const DOMTree = renderer
+    .create(
+      <AlertsProvider>
+        <AddTaskForm />
+      </AlertsProvider>
+    )
+    .toJSON();
 
-//   // })
-// });
-
-// it("renders BarAlert correctly", () => {
-//   const { getByTestId } = render(
-//     <BarAlert
-//       alertText="Warning, something went wrong"
-//       alertType="danger"
-//       removeAlert={() => null}
-//       id="#2345"
-//     />
-//   );
-//   expect(getByTestId("bar-alert")).toHaveTextContent(
-//     "Warning, something went wrong"
-//   );
-// });
-
-// it("matches snapshot 1", () => {
-//   const DOMTree = renderer
-//     .create(
-//       <BarAlert
-//         alertText="Warning, something went wrong"
-//         alertType="danger"
-//         removeAlert={() => null}
-//         id="#2345"
-//       />
-//     )
-//     .toJSON();
-
-//   expect(DOMTree).toMatchSnapshot();
-// });
+  expect(DOMTree).toMatchSnapshot();
+});

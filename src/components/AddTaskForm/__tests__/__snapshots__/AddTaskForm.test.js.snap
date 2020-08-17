@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<div
+  className="css-25o2qi-AddTaskForm"
+  data-testid="add-task-form"
+>
+  <button
+    className="css-1r1xgwo-ToggleFormButton"
+    onClick={[Function]}
+  >
+    New task
+  </button>
+  <form
+    className="css-8enizf-AddTaskForm"
+    onSubmit={[Function]}
+  >
+    <button
+      className="close-window-btn css-jh2deu-CloseWindowButton"
+      onClick={[Function]}
+    >
+      <img
+        alt="close"
+        src="/close-x.png"
+      />
+    </button>
+    <div
+      className="input-slider-wrapper"
+      data-testid="checkbox"
+    >
+      <input
+        className="css-cg9o93-Checkbox"
+        id="taskStatus"
+        name="done"
+        onChange={[Function]}
+        placeholder=" "
+        type="checkbox"
+        value={false}
+      />
+      <label
+        className="css-174x1gu-Checkbox"
+        htmlFor="taskStatus"
+      >
+        in progress
+      </label>
+    </div>
+    <div
+      className="input-slider-wrapper css-1lncui6-InputSlider"
+      data-testid="input-slider"
+    >
+      <input
+        className="css-1wvyecb-InputSlider"
+        id="taskTitle"
+        name="title"
+        onChange={[Function]}
+        placeholder=" "
+        required={true}
+        type="text"
+        value=""
+      />
+      <label
+        className="css-f515j6-InputSlider"
+        htmlFor="taskTitle"
+      >
+        task title
+      </label>
+    </div>
+    <div
+      className="input-slider-wrapper css-1lncui6-InputSlider"
+      data-testid="input-slider"
+    >
+      <input
+        className="css-1wvyecb-InputSlider"
+        id="taskDescription"
+        name="description"
+        onChange={[Function]}
+        placeholder=" "
+        type="text"
+        value=""
+      />
+      <label
+        className="css-f515j6-InputSlider"
+        htmlFor="taskDescription"
+      >
+        task description
+      </label>
+    </div>
+    <button
+      className="css-ctqbc-FormButton"
+    >
+      Add task
+    </button>
+     
+  </form>
+</div>
+`;
