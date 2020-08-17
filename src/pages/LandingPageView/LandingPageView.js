@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 
 // Components
-import Dashbord from "../components/Dashboard/Dashboard";
-import TasksListing from "../components/TasksListing/TasksListing";
-import SectionHeader from "../components/atoms/headers/SectionHeader";
-import AddTaskForm from "../components/AddTaskForm/AddTaskForm";
-import DoubleColumnGrid from "../layout/DoubleColumnGrid";
+import Dashbord from "../../components/Dashboard/Dashboard";
+import TasksListing from "../../components/TasksListing/TasksListing";
+import SectionHeader from "../../components/atoms/headers/SectionHeader";
+import AddTaskForm from "../../components/AddTaskForm/AddTaskForm";
+import DoubleColumnGrid from "../../layout/DoubleColumnGrid";
 
 // Context
-import { TasksContext } from "../context/TasksContext";
+import { TasksContext } from "../../context/TasksContext";
 
 const LandingPageView = () => {
   const { tasksState } = useContext(TasksContext);

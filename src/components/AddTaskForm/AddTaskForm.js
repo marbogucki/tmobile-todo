@@ -6,7 +6,7 @@ import { css, jsx } from "@emotion/core";
 // Components
 import InputSlider from "../atoms/inputs/InputSlider/InputSlider";
 import FormButton from "../atoms/buttons/FormButton";
-import CloseWindowButton from "../atoms/buttons/CloseWindowButton";
+import CloseWindowButton from "../atoms/buttons/CloseWindowButton/CloseWindowButton";
 import ToggleFormButton from "../atoms/buttons/ToggleFormButton";
 import LoadingDefault from "../atoms/loadings/LoadingCircle";
 import Checkbox from "../atoms/inputs/Checkbox/Checkbox";

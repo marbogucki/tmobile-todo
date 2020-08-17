@@ -1,28 +1,28 @@
 import React, { useState, useContext } from "react";
 
 // Custome Hooks
-import useAxiosGetCall from "../hooks/useAxiosGetCall";
+import useAxiosGetCall from "../../hooks/useAxiosGetCall";
 
 // Context
-import { TasksContext } from "../context/TasksContext";
+import { TasksContext } from "../../context/TasksContext";
 
 // Pages
-import PageNotFoundView from "./PageNotFoundView";
+import PageNotFoundView from "../PageNotFoundView/PageNotFoundView";
 
 // Components
-import Dashboard from "../components/Dashboard/Dashboard";
-import SectionHeader from "../components/atoms/headers/SectionHeader";
-import ToggleStatusBadge from "../components/atoms/badges/ToggleStatusBadge";
-import TaskDescriptionPar from "../components/atoms/paragraphs/TaskDescriptionPar";
-import DeleteButton from "../components/atoms/buttons/DeleteButton";
-import EditTaskFormButton from "../components/EditTaskFormButton/EditTaskFormButton";
-import LoadingCircle from "../components/atoms/loadings/LoadingCircle";
+import Dashboard from "../../components/Dashboard/Dashboard";
+import SectionHeader from "../../components/atoms/headers/SectionHeader";
+import ToggleStatusBadge from "../../components/atoms/badges/ToggleStatusBadge";
+import TaskDescriptionPar from "../../components/atoms/paragraphs/TaskDescriptionPar";
+import DeleteButton from "../../components/atoms/buttons/DeleteButton/DeleteButton";
+import EditTaskFormButton from "../../components/EditTaskFormButton/EditTaskFormButton";
+import LoadingCircle from "../../components/atoms/loadings/LoadingCircle";
 
 // Libraries
 import { Redirect } from "react-router-dom";
 
 // Authorization
-import { tasksAPIUrl } from "../auth/tasksAPISettings";
+import { tasksAPIUrl } from "../../auth/tasksAPISettings";
 
 const SingleTaskView = ({ match }) => {
   const [taskData, setTaskData] = useState({});

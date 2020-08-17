@@ -1,8 +1,8 @@
 import React from "react";
 
 // Components
-import Dashboard from "../components/Dashboard/Dashboard";
-import SectionHeader from "../components/atoms/headers/SectionHeader";
+import Dashboard from "../../components/Dashboard/Dashboard";
+import SectionHeader from "../../components/atoms/headers/SectionHeader";
 
 // Libraries
 import { css, jsx } from "@emotion/core";
