@@ -18,6 +18,9 @@ import { tasksAPIUrl, httpHeader } from "../../auth/tasksAPISettings";
 import { TasksContext } from "../../context/TasksContext";
 import { AlertsContext } from "../../context/AlertsContext";
 
+// Utils
+import setFormChanges from "../../utils/setFormChanges";
+
 // Styles
 import { formWrapper, barFormStyle } from "./style/AddTaskFormStyle";
 
@@ -59,17 +62,7 @@ const AddTaskForm = () => {
   };
 
   const onChangeHandler = (event) => {
-    const {
-      target: { name },
-    } = event;
-    const value =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    setFormChanges(event, setFormState, formState);
   };
 
   const toggleMobileFormHandler = (event) => {
