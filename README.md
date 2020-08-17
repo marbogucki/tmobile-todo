@@ -21,6 +21,10 @@ You will also see any lint errors in the console.
 
 Runs a task runner running all tests on save
 
+### `npm run storybook`
+
+Runs a a page with all documented components in the browser
+
 ## Project folder structure/ design
 
 Project fallows the atomic design principle where components are grouped as:
@@ -64,3 +68,6 @@ https://bradfrost.com/blog/post/atomic-web-design/
   https://github.com/axios/axios
 
 - jest/jest-dom - for unit testing
+
+- storybook - for documenting the visual components in react
+  https://storybook.js.org/
