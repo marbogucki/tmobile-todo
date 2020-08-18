@@ -1,4 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+
+// Pages
+import PageNotFoundView from "../PageNotFoundView/PageNotFoundView";
 
 // Components
 import Dashbord from "../../components/Dashboard/Dashboard";
@@ -14,8 +17,13 @@ const LandingPageView = () => {
   const { tasksState } = useContext(TasksContext);
   const getInProgressTasks = (tasks) => tasks.filter((task) => !task.done);
   const getCompletedTasks = (tasks) => tasks.filter((task) => task.done);
+  const { isServerUnreachable } = useContext(TasksContext);
 
-  return (
+  return isServerUnreachable ? (
+    <PageNotFoundView
+      pageTitle={"There were issues contacting server. Try again later"}
+    />
+  ) : (
     <Dashbord>
       <SectionHeader text={"Add task"} />
       <AddTaskForm />{" "}

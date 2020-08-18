@@ -10,6 +10,7 @@ const TasksContext = createContext([]);
 
 const TasksProvider = ({ children, setIsloading }) => {
   const [tasksState, setTasksState] = useState([]);
+  const [isServerUnreachable, setIsServerUnrechable] = useState(false);
 
   const updateOneTaskState = (itemID, newItem) => {
     const findItemIndex = (array, itemID) =>
@@ -35,7 +36,12 @@ const TasksProvider = ({ children, setIsloading }) => {
   useAxiosGetCall(
     tasksAPIUrl,
     setIsloading,
-    (data) => {
+    (data, error) => {
+      console.log("hooonk", error, data);
+      if (error) {
+        setIsServerUnrechable(true);
+        return setTasksState([]);
+      }
       setTasksState(data);
     },
     []
@@ -43,7 +49,13 @@ const TasksProvider = ({ children, setIsloading }) => {
 
   return (
     <TasksContext.Provider
-      value={{ tasksState, setTasksState, updateOneTaskState, removeTask }}
+      value={{
+        tasksState,
+        setTasksState,
+        updateOneTaskState,
+        removeTask,
+        isServerUnreachable,
+      }}
     >
       {children}
     </TasksContext.Provider>
