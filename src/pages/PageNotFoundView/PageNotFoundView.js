@@ -22,4 +22,13 @@ const PageNotFoundView = ({ pageTitle }) => {
     </Dashboard>
   );
 };
+
+// Marcin
+// const PageNotFoundView = ({ pageTitle }) => (
+//   <Dashboard>
+//     <SectionHeader text={pageTitle} />
+//     <span css={notFoundTextParStyle}>Ups 404. Sorry</span>
+//   </Dashboard>
+// );
+
 export default PageNotFoundView;
